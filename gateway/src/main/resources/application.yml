@@ -1,0 +1,57 @@
+spring:
+  application:
+    name: api-gateway
+  cloud:
+    gateway:
+      routes:
+        - id: roadrunner-service
+          uri: http://localhost:8060
+          predicates:
+            - Path=/api/detalles/**
+
+        - id: bus
+          uri: http://localhost:8081
+          predicates:
+            - Path=/api/bus/**
+
+        - id: pago
+          uri: http://localhost:8082
+          predicates:
+            - Path=/api/pago/**
+
+        - id: pasaje
+          uri: http://localhost:8083
+          predicates:
+            - Path=/api/pasaje/**
+
+        - id: ruta
+          uri: http://localhost:8084
+          predicates:
+            - Path=/api/ruta/**
+
+        - id: usuario
+          uri: http://localhost:8085
+          predicates:
+            - Path=/api/usuario/**
+
+        - id: viaje
+          uri: http://localhost:8086
+          predicates:
+            - Path=/api/viaje/**
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka
+
+server:
+  port: 8080
+
+logging:
+  level:
+    org.springframework.web: DEBUG
+    org.springframework.security: DEBUG
+    org.springframework.cloud.gateway: DEBUG
+    org.springframework.web.server.adapter.HttpWebHandlerAdapter: DEBUG
+    org.springframework.security.web.server.authorization.AuthorizationWebFilter: DEBUG
+    org.springframework.web.client.RestTemplate: DEBUG
